@@ -14,9 +14,9 @@
 
 #import "DFImagesSendViewController.h"
 
-#define NavBarBgColor [UIColor colorWithRed:24/255.0 green:30/255.0 blue:43/255.0 alpha:1.0]
-#define NavBarFgColor [UIColor whiteColor]
-#define NavTextAttribute @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont boldSystemFontOfSize:18]}
+#define NavBarBgColor [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
+#define NavBarFgColor [UIColor blackColor]
+#define NavTextAttribute @{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont boldSystemFontOfSize:18]}
 
 
 @interface AppDelegate ()
@@ -47,11 +47,10 @@
     
     [_window makeKeyAndVisible];
     
-    
-    application.statusBarStyle = UIStatusBarStyleLightContent;
-    [UINavigationBar appearance].barTintColor =NavBarBgColor;
-    [UINavigationBar appearance].tintColor = NavBarFgColor;
-    [UINavigationBar appearance].titleTextAttributes = NavTextAttribute;
+    application.statusBarStyle = UIStatusBarStyleDefault;
+//    [UINavigationBar appearance].barTintColor =NavBarBgColor;
+//    [UINavigationBar appearance].tintColor = NavBarFgColor;
+//    [UINavigationBar appearance].titleTextAttributes = NavTextAttribute;
 
     
     return YES;

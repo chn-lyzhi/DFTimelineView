@@ -33,6 +33,10 @@
     
 }
 
+- (UIBarButtonItem *)leftBarButtonItem {
+    return nil;
+}
+
 -(void) setHeader
 {
     NSString *coverUrl = [NSString stringWithFormat:@"http://file-cdn.datafans.net/temp/12.jpg_%dx%d.jpeg", (int)self.coverWidth, (int)self.coverHeight];

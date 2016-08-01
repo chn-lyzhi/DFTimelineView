@@ -153,13 +153,13 @@
     
     UILabel *timeLabel = [UILabel new];
     timeLabel.textColor = [UIColor lightGrayColor];
-    timeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    timeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
     
     UIImageView *imageView = [UIImageView new];
     [imageView setBackgroundColor:[UIColor lightGrayColor]];
     
     UILabel *detailLabel = [UILabel new];
-    detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     detailLabel.textColor = [UIColor lightGrayColor];
     //!!!!关键,问题6p 上 Margin 值和 6上的值并不一致
     detailLabel.preferredMaxLayoutWidth = [[UIScreen mainScreen]bounds].size.width - 16;

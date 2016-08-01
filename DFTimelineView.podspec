@@ -37,5 +37,6 @@ Pod::Spec.new do |s|
   s.dependency 'MJPhotoBrowser', '~> 1.0.2'
   s.dependency 'MMPopupView', '~> 1.7.2'
   s.dependency 'TZImagePickerController', '~> 1.4.5'
+  s.dependency 'SKTagView', :git => 'https://github.com/chn-lyzhi/SKTagView.git'
 
 end

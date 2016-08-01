@@ -275,12 +275,16 @@
 
 -(UIBarButtonItem *)leftBarButtonItem
 {
-    return [UIBarButtonItem text:@"取消" selector:@selector(cancel) target:self];
+//    UIBarButtonItem *item = [UIBarButtonItem text:@"取消" selector:@selector(cancel) target:self];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    return item;
 }
 
 -(UIBarButtonItem *)rightBarButtonItem
 {
-    return [UIBarButtonItem text:@"发送" selector:@selector(send) target:self];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(send)];
+    return item;
+//    return [UIBarButtonItem text:@"发送" selector:@selector(send) target:self];
 }
 
 -(void) cancel

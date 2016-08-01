@@ -34,5 +34,8 @@
 //用户图文消息
 #import "DFTextImageUserLineItem.h"
 
+#import "TENSubjectShowViewController.h"
+#import "SubjectShowTableViewCell.h"
+#import "TENSubjectShowDetailViewController.h"
 
 #endif /* DFTimelineView_h */
