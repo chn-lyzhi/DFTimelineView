@@ -701,26 +701,46 @@
         NSMutableArray *likes = item.likes;
         NSString *result = @"";
         
-        for (int i=0; i<likes.count;i++) {
-            DFLineLikeItem *like = [likes objectAtIndex:i];
-            if (i == 0) {
-                result = [NSString stringWithFormat:@"%@",like.userNick];
-            }else{
-                result = [NSString stringWithFormat:@"%@, %@", result, like.userNick];
+        //多于7个人，则显示前7个，然后加上“等＊人”
+        if (likes.count > 7) {
+            for (int i = 0; i < 7; i++) {
+                DFLineLikeItem *like = [likes objectAtIndex:i];
+                if (i != 0) {
+                    result = [result stringByAppendingString:@", "];
+                }
+                result = [result stringByAppendingString:like.userNick];
+                
             }
+            result = [result stringByAppendingString:[NSString stringWithFormat:@"等%ld人",likes.count]];
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:result];
+            NSUInteger position = 0;
+            for (int i=0; i<7;i++) {
+                DFLineLikeItem *like = [likes objectAtIndex:i];
+                [attrStr addAttribute:NSLinkAttributeName value:[NSString stringWithFormat:@"%lu", (unsigned long)like.userId] range:NSMakeRange(position, like.userNick.length)];
+                position += like.userNick.length+2;
+            }
+            item.likesStr = attrStr;
+        } else {
+            for (int i=0; i<likes.count;i++) {
+                DFLineLikeItem *like = [likes objectAtIndex:i];
+                
+                if (i == 0) {
+                    result = [NSString stringWithFormat:@"%@",like.userNick];
+                }else{
+                    result = [NSString stringWithFormat:@"%@, %@", result, like.userNick];
+                }
+            }
+            
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:result];
+            NSUInteger position = 0;
+            for (int i=0; i<likes.count;i++) {
+                DFLineLikeItem *like = [likes objectAtIndex:i];
+                [attrStr addAttribute:NSLinkAttributeName value:[NSString stringWithFormat:@"%lu", (unsigned long)like.userId] range:NSMakeRange(position, like.userNick.length)];
+                position += like.userNick.length+2;
+            }
+            item.likesStr = attrStr;
         }
-        
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:result];
-        NSUInteger position = 0;
-        for (int i=0; i<likes.count;i++) {
-            DFLineLikeItem *like = [likes objectAtIndex:i];
-            [attrStr addAttribute:NSLinkAttributeName value:[NSString stringWithFormat:@"%lu", (unsigned long)like.userId] range:NSMakeRange(position, like.userNick.length)];
-            position += like.userNick.length+2;
-        }
-        
-        item.likesStr = attrStr;
     }
-    
 }
 
 -(void) genCommentAttrString:(DFBaseLineItem *)item

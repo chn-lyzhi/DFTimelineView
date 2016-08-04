@@ -34,5 +34,6 @@
 @property (nonatomic) DFGridImageView * gridView;
 
 - (void)setData:(NSDictionary *)dictionary;
+- (void)setTitle:(NSString *)title detail:(NSString *)detail state:(NSString *)state itemNumer:(NSNumber *)item likeNumber:(NSNumber *)like gridViewImages:(NSArray *)gridViewImages;
 
 @end

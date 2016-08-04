@@ -38,6 +38,7 @@
     _moreLabel = [self labelWithFontSize:11 color:[UIColor orangeColor]];
     _imageContentTitle = [self labelWithFontSize:13 color:[UIColor lightGrayColor]];
     _gridView = [[DFGridImageView alloc]initWithFrame:CGRectMake(0, 0, 288, 0)];
+    [_gridView setUserInteractionEnabled:NO];
     
     [self.contentView addSubview:_backView];
     [_backView addSubview:_colorView];
@@ -110,6 +111,28 @@
         make.bottom.equalTo(_backView.mas_bottomMargin);
 //        make.size.mas_equalTo(CGSizeZero);
     }];
+}
+
+- (void)setTitle:(NSString *)title detail:(NSString *)detail state:(NSString *)state itemNumer:(NSNumber *)item likeNumber:(NSNumber *)like gridViewImages:(NSArray *)gridViewImages {
+    _titleLabel.text = title;
+    _detailLabel.text = detail;
+    _stateLabel.text = state;
+    _itemNumber.text = [NSString stringWithFormat:@"发布量：%@",item];
+    _likeNumber.text = [NSString stringWithFormat:@"点赞数：%@",like];
+    
+    NSMutableArray *array = [NSMutableArray arrayWithArray:gridViewImages];
+    
+    CGFloat gridViewWidth = _backView.frame.size.width - 16;
+    CGFloat gridViewHeight = [DFGridImageView getHeight:array maxWidth:gridViewWidth oneImageWidth:80 oneImageHeight:80];
+    [_gridView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(gridViewWidth, gridViewHeight));
+    }];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_gridView updateWithImages:array srcImages:array oneImageWidth:80 oneImageHeight:80];
+    });
+
 }
 
 - (void)setData:(NSDictionary *)dictionary {
