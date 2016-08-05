@@ -28,6 +28,10 @@
 }
 
 #pragma mark - tableDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.datas.count;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:[DFTimeLineViewController new] animated:YES];
