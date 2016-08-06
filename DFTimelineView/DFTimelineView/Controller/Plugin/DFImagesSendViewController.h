@@ -7,6 +7,7 @@
 //
 
 #import <DFCommon/DFCommon.h>
+#import <SKTagView.h>
 
 typedef enum : NSUInteger {
     DFImagesSendViewControllerTypeNone,
@@ -20,8 +21,12 @@ typedef enum : NSUInteger {
 -(void) onSendTextImage:(NSString *) text images:(NSArray *)images;
 -(void) onSendTextImage:(NSString *) text images:(NSArray *)images tags:(NSArray<NSString *> *)tags;
 - (DFImagesSendViewControllerType)imagesSendViewControllerType;
+//获取标题（发布话题秀
 - (NSString *)topicTitle;
+//获取个人秀Tag（发布个人秀
 - (NSArray<NSString *> *)tagsArray;
+//获取SKTag样式
+- (SKTag *)getTagWithText:(NSString *)text;
 
 @end
 @interface DFImagesSendViewController : DFBaseViewController

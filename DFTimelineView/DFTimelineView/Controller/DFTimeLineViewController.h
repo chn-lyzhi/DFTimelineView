@@ -13,6 +13,7 @@
 
 #import "DFBaseTimeLineViewController.h"
 
+#import <SKTagView.h>
 
 typedef enum : NSUInteger {
     TimeLineTypeNone,   //
@@ -30,6 +31,9 @@ typedef enum : NSUInteger {
 //根据ID删除
 -(void) deleteItem:(long long) itemId;
 
+//删除全部
+- (void)deleteAllItem;
+
 //赞
 -(void) addLikeItem:(DFLineLikeItem *) likeItem itemId:(long long) itemId;
 
@@ -43,6 +47,8 @@ typedef enum : NSUInteger {
 //发送视频消息
 -(void)onSendVideo:(NSString *)text videoPath:(NSString *)videoPath screenShot:(UIImage *) screenShot;
 
+//点击右上角头像
+- (void) onClickAvatar;
 
 //OnClickTagView
 - (void)tagViewSelectedTitle:(NSArray *)array;
@@ -57,5 +63,8 @@ typedef enum : NSUInteger {
 - (void)setHeaderForTopicDataTitle:(NSString *)title time:(NSString *)time imageUrl:(NSString *)imageUrl content:(NSString *)content;
 
 @property (nonatomic) DFTimeLineViewControllerType type;
+
+//获取tag样式
+- (SKTag *)getTagWithText:(NSString *)text;
 
 @end

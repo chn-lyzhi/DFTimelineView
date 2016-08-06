@@ -241,8 +241,6 @@
     [self addItem:textImageItem3];
 }
 
-
-
 -(void)onCommentCreate:(long long)commentId text:(NSString *)text itemId:(long long) itemId
 {
         DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
@@ -281,6 +279,9 @@
     NSLog(@"onClickMoreButton:%ld",userID);
 }
 
+- (void)onClickAvatar {
+    [self deleteAllItem];
+}
 
 -(void)onClickHeaderUserAvatar
 {

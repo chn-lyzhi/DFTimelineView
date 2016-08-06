@@ -25,7 +25,7 @@
 
 #import <SDCycleScrollView.h>
 
-#import <SKTagView.h>
+
 #import "TENSubjectShowViewController.h"
 
 #import <Masonry.h>
@@ -268,16 +268,21 @@
         _tagView.padding = UIEdgeInsetsMake(4, 8, 4, 8);
         _tagView.selectedType = SKTagViewSelectedSingle;
         for (NSString *string in tags) {
-            SKTag *tag = [[SKTag alloc]initWithText:string];
-            tag.textColor = [UIColor lightGrayColor];
-            //        tag.bgColor = [UIColor groupTableViewBackgroundColor];
-            tag.cornerRadius = 3;
-            tag.fontSize = 15;
-            tag.borderColor = [UIColor lightGrayColor];
-            tag.borderWidth = 1.f;
-            tag.padding = UIEdgeInsetsMake(3.5, 10.5, 3.5, 10.5);
-            tag.selectedBgColor = [UIColor redColor];
-            tag.selectedTextColor = [UIColor whiteColor];
+            SKTag *tag;
+            if ([self respondsToSelector:@selector(getTagWithText:)]) {
+                tag = [self getTagWithText:string];
+            } else {
+                tag = [[SKTag alloc]initWithText:string];
+                tag.textColor = [UIColor lightGrayColor];
+                //        tag.bgColor = [UIColor groupTableViewBackgroundColor];
+                tag.cornerRadius = 3;
+                tag.fontSize = 15;
+                tag.borderColor = [UIColor lightGrayColor];
+                tag.borderWidth = 1.f;
+                tag.padding = UIEdgeInsetsMake(3.5, 10.5, 3.5, 10.5);
+                tag.selectedBgColor = [UIColor redColor];
+                tag.selectedTextColor = [UIColor whiteColor];
+            }
             
             [_tagView addTag:tag];
         }
@@ -344,7 +349,7 @@
     if (image) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         [button setImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(onLongPressCamera:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(onClickAvatar) forControlEvents:UIControlEventTouchUpInside];
         return [[UIBarButtonItem alloc] initWithCustomView:button];
     } else {
         UIBarButtonItem *item = [UIBarButtonItem icon:@"Camera" selector:@selector(onClickCamera:) target:self];
@@ -376,6 +381,10 @@
             });
         }] resume];
     }
+}
+
+- (void) onClickAvatar {
+    
 }
 
 -(void) onClickCamera:(id) sender
@@ -461,7 +470,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _items.count;
 }
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -549,6 +557,12 @@
     DFBaseLineItem *item = [self getItem:itemId];
     [_items removeObject:item];
     [_itemDic removeObjectForKey:[NSNumber numberWithLongLong:item.itemId]];
+}
+
+- (void)deleteAllItem {
+    [_items removeAllObjects];
+    [_itemDic removeAllObjects];
+    [self.tableView reloadData];
 }
 
 -(DFBaseLineItem *) getItem:(long long) itemId

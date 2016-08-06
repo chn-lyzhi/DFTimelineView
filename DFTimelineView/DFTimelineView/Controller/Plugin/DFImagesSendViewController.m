@@ -19,7 +19,7 @@
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#import <SKTagView.h>
+
 #import <Masonry.h>
 
 #define ImageGridWidth [UIScreen mainScreen].bounds.size.width*0.7
@@ -255,16 +255,21 @@
     [_tagView removeAllTags];
     if ([self.delegate respondsToSelector:@selector(tagsArray)]) {
         [[self.delegate tagsArray] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            SKTag *tag = [[SKTag alloc]initWithText:obj];
-            tag.textColor = [UIColor lightGrayColor];
-            //        tag.bgColor = [UIColor groupTableViewBackgroundColor];
-            tag.cornerRadius = 3;
-            tag.fontSize = 15;
-            tag.borderColor = [UIColor lightGrayColor];
-            tag.borderWidth = 1.f;
-            tag.padding = UIEdgeInsetsMake(3.5, 10.5, 3.5, 10.5);
-            tag.selectedBgColor = [UIColor redColor];
-            tag.selectedTextColor = [UIColor whiteColor];
+            SKTag *tag;
+            if ([self.delegate respondsToSelector:@selector(getTagWithText:)]) {
+                tag = [self.delegate getTagWithText:obj];
+            } else {
+                tag = [[SKTag alloc]initWithText:obj];
+                tag.textColor = [UIColor lightGrayColor];
+                //        tag.bgColor = [UIColor groupTableViewBackgroundColor];
+                tag.cornerRadius = 3;
+                tag.fontSize = 15;
+                tag.borderColor = [UIColor lightGrayColor];
+                tag.borderWidth = 1.f;
+                tag.padding = UIEdgeInsetsMake(3.5, 10.5, 3.5, 10.5);
+                tag.selectedBgColor = [UIColor redColor];
+                tag.selectedTextColor = [UIColor whiteColor];
+            }
             
             [_tagView addTag:tag];
         }];
