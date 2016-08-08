@@ -209,7 +209,7 @@
     
     //TODO:!!!!!
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView beginUpdates];
         self.tableView.tableHeaderView = nil;
         self.tableView.tableHeaderView = back;
@@ -312,7 +312,7 @@
     }];
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView beginUpdates];
 //        self.tableView.tableHeaderView = nil;
         self.tableView.tableHeaderView = header;
@@ -627,6 +627,10 @@
 }
  **/
 
+- (void)onClickCollect:(long long)itemID {
+    NSLog(@"%lld",itemID);
+}
+
 - (void)onComment:(long long)itemId cell:(DFBaseLineCell *)cell {
     _currentItemId = itemId;
     
@@ -800,8 +804,7 @@
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
     NSLog(@"%@", photos);
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:photos];
         controller.delegate = self;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];

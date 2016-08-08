@@ -33,7 +33,7 @@
 
 #define LikeCommentTimeSpace 3
 
-#define ToolbarWidth 150
+#define ToolbarWidth 225
 #define ToolbarHeight 30
 
 #import "DFBaseLineCell.h"
@@ -438,7 +438,12 @@
     }
 }
 
-
+- (void)onCollect {
+    [self hideLikeCommentToolbar];
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickCollect:)]) {
+        [_delegate onClickCollect:self.item.itemId];
+    }
+}
 
 #pragma mark - DFLikeCommentViewDelegate
 

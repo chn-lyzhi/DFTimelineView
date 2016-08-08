@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) UIButton *commentButton;
 
+@property (nonatomic, strong) UIButton *collectButton;
+
 
 @end
 
@@ -39,29 +41,37 @@
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch];
     self.image = image;
     
-    
-    
     CGFloat x, y, width, height;
     
     x=0;
     y=0;
-    width = self.frame.size.width/2;
+    width = self.frame.size.width/3;
     height = self.frame.size.height;
     
+    _collectButton = [self getButton:CGRectMake(x, y, width, height) title:@"收藏" image:@""];
+    [_collectButton addTarget:self action:@selector(onCollect:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_collectButton];
+    
+    x = width;
     _likeButton = [self getButton:CGRectMake(x, y, width, height) title:@"赞" image:@"AlbumLike"];
     [_likeButton addTarget:self action:@selector(onLike:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_likeButton];
     
-    x = width;
+    //分割线
+    CGFloat lineHeight = height -16;
+    CGFloat liney = (self.frame.size.height - lineHeight)/2;
+    CGFloat linewidth = 1.0/[[UIScreen mainScreen]scale];
+    UIView *dividerAnother = [[UIView alloc] initWithFrame:CGRectMake(x, liney, linewidth, lineHeight)];
+    dividerAnother.backgroundColor = [UIColor whiteColor];
+    [self addSubview:dividerAnother];
+
+    x += width;
     _commentButton = [self getButton:CGRectMake(x, y, width, height) title:@"评" image:@"AlbumComment"];
     [_commentButton addTarget:self action:@selector(onComment:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_commentButton];
     
     //分割线
-    height = height -16;
-    y = (self.frame.size.height - height)/2;
-    width = 1;
-    UIView *divider = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+    UIView *divider = [[UIView alloc] initWithFrame:CGRectMake(x, liney, linewidth, lineHeight)];
     divider.backgroundColor = [UIColor whiteColor];
     [self addSubview:divider];
     
@@ -86,7 +96,6 @@
     if (_delegate != nil && [_delegate respondsToSelector:@selector(onLike)]) {
         [_delegate onLike];
     }
-    
 }
 
 
@@ -96,4 +105,11 @@
         [_delegate onComment];
     }
 }
+
+- (void)onCollect:(UIButton *)sender {
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onCollect)]) {
+        [_delegate onCollect];
+    }
+}
+
 @end

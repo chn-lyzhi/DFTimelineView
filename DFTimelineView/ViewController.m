@@ -59,7 +59,7 @@
     [thumbImages addObject:@"http://file-cdn.datafans.net/temp/15.jpg_160x160.jpeg"];
 
     //TODO:updateHeader
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setHeaderDataTitle:nil images:thumbImages tags:@[@"AAA",@"BBB",@"CCC"]];
         [self updateRightAvatarWithImage:@"http://file-cdn.datafans.net/avatar/1.jpeg_100x100.jpeg"];
     });

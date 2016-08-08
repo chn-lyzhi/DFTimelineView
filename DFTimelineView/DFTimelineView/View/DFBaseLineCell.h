@@ -40,6 +40,8 @@
 
 -(void) onClickComment:(long long) commentId itemId:(long long) itemId linkLabel:(UIView *)linkLabel;
 
+- (void) onClickCollect:(long long)itemID;
+
 @end
 
 @interface DFBaseLineCell : UITableViewCell

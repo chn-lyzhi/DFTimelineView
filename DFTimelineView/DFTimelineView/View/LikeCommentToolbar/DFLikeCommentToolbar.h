@@ -12,6 +12,7 @@
 
 -(void) onLike;
 -(void) onComment;
+- (void) onCollect;
 
 @end
 
