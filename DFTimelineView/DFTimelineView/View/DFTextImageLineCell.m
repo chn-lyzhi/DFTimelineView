@@ -68,8 +68,7 @@
         _textContentLabel.activeLinkTextAttributes = nil;
         _textContentLabel.lineHeightMultiple = TextLineHeight;
         _textContentLabel.linkTextAttributes = @{NSForegroundColorAttributeName: HighLightTextColor};
-        
-        
+
         [_textContentLabel setDidClickLinkBlock:^(MLLink *link, NSString *linkText, MLLinkLabel *label) {
             NSString *tips = [NSString stringWithFormat:@"Click\nlinkType:%ld\nlinkText:%@\nlinkValue:%@",(unsigned long)link.linkType,linkText,link.linkValue];
             NSLog(@"%@", tips);

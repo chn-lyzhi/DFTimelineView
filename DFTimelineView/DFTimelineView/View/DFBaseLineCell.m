@@ -6,10 +6,6 @@
 //  Copyright (c) 2015年 Datafans, Inc. All rights reserved.
 //
 
-
-
-
-
 #define UserNickFont [UIFont systemFontOfSize:16]
 #define TitleLabelFont [UIFont systemFontOfSize:13]
 
@@ -52,7 +48,7 @@
 @property (nonatomic, strong) UIButton *userAvatarButton;
 
 @property (strong, nonatomic) UIButton *moreButton;
-
+@property (nonatomic, strong) UILabel *tagLabel;
 
 @property (nonatomic, strong) MLLinkLabel *userNickLabel;
 
@@ -159,6 +155,20 @@
         [self.contentView addSubview:_locationLabel];
     }
     
+    if (_tagLabel == nil) {
+        
+        _tagLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+
+        _tagLabel.textAlignment = NSTextAlignmentCenter;
+        _tagLabel.font = [UIFont systemFontOfSize:11];
+        _tagLabel.textColor = [UIColor orangeColor];
+        _tagLabel.layer.borderColor = [[UIColor orangeColor]CGColor];
+        _tagLabel.layer.borderWidth = 1.f;
+        _tagLabel.layer.cornerRadius = 3.f;
+        [self.contentView addSubview:_tagLabel];
+    }
+
+    
     if (_timeLabel == nil) {
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _timeLabel.textColor = [UIColor lightGrayColor];
@@ -207,7 +217,8 @@
         height = 44;
         
         _moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_moreButton setTitle:@"更多" forState:UIControlStateNormal];
+        [_moreButton setTitle:@"more" forState:UIControlStateNormal];
+        _moreButton.titleLabel.font = [UIFont systemFontOfSize:13];
         [_moreButton setFrame:CGRectMake(x, y, width, height)];
         [_moreButton addTarget:self action:@selector(onClickMoreButton:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_moreButton];
@@ -240,12 +251,17 @@
     _userNickLabel.frame = CGRectMake(x, y, width, height);
     _userNickLabel.attributedText = userNick;
     
-    
     x = CGRectGetMaxX(_userNickLabel.frame) + Padding;
     width = [UIScreen mainScreen].bounds.size.width - x - Margin;
     _titleLabel.frame = CGRectMake(x, y, width, height);
     _titleLabel.text = item.title;
     _titleLabel.hidden = item.title == nil || [item.title isEqualToString:@""];
+    
+    if (!item.tagString || item.tagString.length <= 0) {
+        [_tagLabel setHidden:YES];
+    } else {
+        _tagLabel.text = item.tagString;
+    }
 }
 
 
@@ -272,6 +288,7 @@
     y = _bodyView.frame.origin.y;
     width = _bodyView.frame.size.width;
     
+    
     //位置
     if (self.item.location != nil && ![self.item.location isEqualToString:@""]) {
         y = CGRectGetMaxY(_bodyView.frame) + Padding;
@@ -286,6 +303,8 @@
         _locationLabel.hidden = YES;
     }
     
+
+    
     //时间
     y = CGRectGetMaxY(_bodyView.frame) + sumHeight + Padding;
     width = 100;
@@ -293,6 +312,19 @@
     _timeLabel.hidden = NO;
     _timeLabel.frame = CGRectMake(x, y, width, height);
     _timeLabel.text = [DFToolUtil preettyTime:self.item.ts];
+    
+    //标签
+    if (self.item.tagString != nil && self.item.tagString.length > 0) {
+        
+        y = CGRectGetMaxY(_bodyView.frame) + Padding;
+        CGFloat tagX = _timeLabel.frame.origin.x + _timeLabel.frame.size.width + 8;
+        CGFloat tagHeight = LocationLabelHeight;
+        _tagLabel.hidden = NO;
+        _tagLabel.frame = CGRectMake(tagX, y, width, tagHeight);
+    } else {
+        _tagLabel.hidden = YES;
+    }
+
     
     
     //点赞评论按钮
@@ -452,7 +484,6 @@
     if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
         [_delegate onClickUser:userId];
     }
-
 }
 
 /**

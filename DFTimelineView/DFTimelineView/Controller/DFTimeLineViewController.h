@@ -17,7 +17,8 @@
 
 typedef enum : NSUInteger {
     TimeLineTypeNone,   //
-    TImeLineTypeSubjectShow,  //单个subject秀列表
+    TimeLineTypeSubjectShow,  //单个subject秀列表
+    TimeLineTypeUserShow,  //单个user秀列表
 } DFTimeLineViewControllerType;
 
 @interface DFTimeLineViewController : DFBaseTimeLineViewController

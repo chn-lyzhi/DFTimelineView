@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *userAvatar;
 
 @property (nonatomic, strong) NSString *title;
-
+@property (nonatomic, strong) NSString *tagString;
 
 @property (nonatomic, strong) NSString *location;
 

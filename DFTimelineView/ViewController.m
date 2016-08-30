@@ -160,6 +160,7 @@
     textImageItem2.userAvatar = @"http://file-cdn.datafans.net/avatar/2.jpg";
     textImageItem2.userNick = @"奥巴马";
     textImageItem2.title = @"发表了";
+    textImageItem2.tagString = @"全国联保";
     textImageItem2.text = @"京东JD.COM-专业的综合网上购物商城，销售超数万品牌、4020万种商品，http://jd.com 囊括家电、手机、电脑、服装、图书、母婴、个护、食品、旅游等13大品类。秉承客户为先的理念，京东所售商品为正品行货、全国联保、机打发票。@刘强东";
     
     NSMutableArray *srcImages2 = [NSMutableArray array];

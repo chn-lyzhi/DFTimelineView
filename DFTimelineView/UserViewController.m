@@ -25,17 +25,11 @@
 {
     NSString *coverUrl = [NSString stringWithFormat:@"http://file-cdn.datafans.net/temp/12.jpg_%dx%d.jpeg", (int)self.coverWidth, (int)self.coverHeight];
     [self setCover:coverUrl];
-    
     NSString *avatarUrl = [NSString stringWithFormat:@"http://file-cdn.datafans.net/avatar/1.jpeg_%dx%d.jpeg", (int)self.userAvatarSize, (int)self.userAvatarSize];
     [self setUserAvatar:avatarUrl];
-    
     [self setUserNick:@"Allen"];
-    
     [self setUserSign:@"梦想还是要有的 万一实现了呢"];
-    
 }
-
-
 
 -(void) initData
 {
